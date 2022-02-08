@@ -1,0 +1,39 @@
+image: node:15.3.0
+
+stages:
+  - build
+  - deploy
+
+
+#build:
+#  stage: build
+#  tags:
+#    - npm
+#  script:
+#    - yarn install # npm install
+#    - yarn docs:build # npm run docs:build
+
+pages:
+  stage: build
+
+  script:
+    - yarn # npm install
+    - yarn docs:build # npm run docs:build
+    - rm -rf public
+    - pwd
+    - ls ./docs
+    - mkdir public && cp -rf docs/dist/* public
+
+  artifacts:
+    paths:
+      - public
+  only:
+    - ghpage
+  tags:
+    - npm
+
+
+cache:
+  paths:
+    - node_modules/
+    - dist
