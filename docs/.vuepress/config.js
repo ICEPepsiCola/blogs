@@ -7,6 +7,7 @@ module.exports = {
         ['link', {rel: 'icon', href: '/favicon.ico'}],
     ],
     theme: 'antdocs',
+    base: '/blogs/',
     themeConfig: {
         sidebar: [
             {
