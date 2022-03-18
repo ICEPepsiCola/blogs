@@ -20,6 +20,7 @@ module.exports = {
                     'study/react.md',
                     'study/dom.md',
                     'study/leetcode.md',
+                    'study/computer.md',
                 ]
             }
         ],

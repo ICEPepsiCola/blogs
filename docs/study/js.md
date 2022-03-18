@@ -52,7 +52,7 @@ const add = x => y => z => x + y + z;
 ```
 
 
-## Vue和React
+### Vue和React
 
 相同点
 
