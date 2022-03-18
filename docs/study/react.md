@@ -20,3 +20,22 @@ function WithTest(WrappedComponent, name) {
     }
 }
 ```
+
+### react为什么需要合成事件
+
+1. 进行浏览器兼容，实现更好的跨平台
+2. 方便事件统一管理和事物机制
+
+
+### 为什么有时react两次setState，只执行一次
+
+因为setState不是立即执行的，调用setState后会压入任务队列，在isBatchingUpdates
+为false的时候才会执行，在执行的时候react会合并重复的任务
+
+
+### redux有哪些原则  
+    - 单一数据源
+    - 只读
+    - 纯函数修改
+
+### 
