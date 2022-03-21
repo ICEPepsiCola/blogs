@@ -19,18 +19,16 @@ function _instanceof(instance, Proto) {
 
 ### 解释一下原型链
 
-prototype，显式原型属性，指向对象的原型对象
-constructor，显示属性，指向对象的构造函数
+prototype，显式原型属性，指向对象的原型对象 constructor，显示属性，指向对象的构造函数
 __proto__，隐式属性，指向实例的构造函数的原型对象
-__proto__将对象和原型连接起来组成了原型链
-所有函数的原型都指向Function
-所有对象的原型都指向Object
+__proto__将对象和原型连接起来组成了原型链 所有函数的原型都指向Function 所有对象的原型都指向Object
 
 ### apply和call的作用和区别
 
 作用都是在函数执行时改变this的指向，区别是apply接受的是包含多个参数的数组，而call是参数列表
 
 实现apply
+
 ```js
 function _apply(t, args) {
     const f = this.bind(t);
@@ -39,6 +37,7 @@ function _apply(t, args) {
 ```
 
 实现call
+
 ```js
 function _call(t, args) {
     const f = this.bind(t);
@@ -47,10 +46,10 @@ function _call(t, args) {
 ```
 
 实现 add(1)(2)(3)
+
 ```js
 const add = x => y => z => x + y + z;
 ```
-
 
 ### Vue和React
 
@@ -68,3 +67,33 @@ const add = x => y => z => x + y + z;
     3. React是JSX，Vue推崇模板
     4. React提倡数据不可变，Vue基于数据可变
     5. React的更新是全部，Vue是局部
+
+### webview是什么
+
+APP中内嵌的基于Webkit内核对的View组件，来用展示Web内容，支持浏览器的基础功能，类似iframe
+
+### 实现async
+
+```js
+function asyncGenerator(fun) {
+    return new Promise(function (resolve, reject) {
+        const gen = fun.call(this);
+
+        function step(method = 'next', args) {
+            let result;
+            try {
+                result = gen(method)(args);
+            } catch (e) {
+                reject(e);
+            }
+            const {value, done} = result;
+            return done ? resolve(value) : Promise.resolve(value).then((e) => step('next', e)).catch((e) => step('throw', e));
+        }
+    });
+}
+
+asyncGenerator(function* () {
+    const a = yield 1;
+    console.log(a);
+})
+```
